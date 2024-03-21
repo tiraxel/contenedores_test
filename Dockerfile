@@ -1,11 +1,9 @@
 FROM ubuntu:22.04
 # Instalacion de dependencias
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-17-jdk wget unzip gnupg curl jq git inetutils-traceroute mlocate libnet-ssleay-perl libio-socket-ssl-perl tzdata
-# Estableciendo la zona horaria
-ENV TZ=America/Santiago
-# Configuracion la zona horaria
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-17-jdk wget unzip gnupg git xvfb\
+    
+
 ENV JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64'
 ENV PATH=${JAVA_HOME}/bin:${PATH}
 # Descargar e instalar Gradle
@@ -24,19 +22,13 @@ RUN wget --no-verbose  "https://services.gradle.org/distributions/gradle-${GRADL
 # Configuracion variables de entorno de Gradle
 ENV GRADLE_HOME=/opt/gradle-${GRADLE_VERSION}
 ENV PATH=${GRADLE_HOME}/bin:${PATH}
-# SendEmail
-RUN apt-get update && \
-    apt-get install -y sendemail && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+
 # Variables de entorno
 ENV RAMA=${RAMA}
 ENV REPOSITORIO=${REPOSITORIO}
 ENV TAG=${TAG}
 ENV NAV=${NAV}
-ENV MAIL_USERNAME=${MAIL_USERNAME}
-ENV MAIL_PW=${MAIL_PW}
-ENV B_TOKEN=${B_TOKEN}
+
 COPY app /opt
 WORKDIR /opt/
 RUN chmod 777 /opt/
