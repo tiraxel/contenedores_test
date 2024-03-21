@@ -1,9 +1,14 @@
 FROM ubuntu:22.04
 # Instalacion de dependencias
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-17-jdk wget unzip gnupg git xvfb
-    
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-17-jdk wget unzip gnupg git xvfb\
+    && wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.198-1_amd64.deb \
+    && apt-get install -y /tmp/chrome.deb \
+    && rm /tmp/chrome.deb \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
+#Variables de entorno Java
 ENV JAVA_HOME='/usr/lib/jvm/java-17-openjdk-amd64'
 ENV PATH=${JAVA_HOME}/bin:${PATH}
 # Descargar e instalar Gradle
