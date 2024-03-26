@@ -23,9 +23,7 @@ RUN wget --no-verbose  "https://services.gradle.org/distributions/gradle-${GRADL
     && wget "https://repo1.maven.org/maven2/org/testng/testng/7.5.1/testng-7.5.1.jar" \
     && mv testng-7.5.1.jar /opt/gradle-${GRADLE_VERSION}/lib/plugins/ \
     && rm /opt/gradle-${GRADLE_VERSION}/lib/plugins/testng-6.3.1.jar \
-    && mv /opt/gradle-${GRADLE_VERSION}/lib/plugins/testng-7.5.1.jar /opt/gradle-${GRADLE_VERSION}/lib/plugins/testng-6.3.1.jar \
-    && rm /opt/gradle-${GRADLE_VERSION}/lib/commons-compress-1.21.jar \
-    && wget https://github.com/tiraxel/librerias_varias/raw/main/commons-compress-1.26.1.jar 
+    && mv /opt/gradle-${GRADLE_VERSION}/lib/plugins/testng-7.5.1.jar /opt/gradle-${GRADLE_VERSION}/lib/plugins/testng-6.3.1.jar  
 # Configuracion variables de entorno de Gradle
 ENV GRADLE_HOME=/opt/gradle-${GRADLE_VERSION}
 ENV PATH=${GRADLE_HOME}/bin:${PATH}
