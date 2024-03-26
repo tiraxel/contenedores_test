@@ -28,12 +28,7 @@ RUN wget --no-verbose  "https://services.gradle.org/distributions/gradle-${GRADL
     && wget https://github.com/tiraxel/librerias_varias/raw/main/commons-compress-1.26.1.jar \
     && mv commons-compress-1.26.1.jar commons-compress-1.21.jar \
     && mv commons-compress-1.21.jar /opt/gradle-${GRADLE_VERSION}/lib/ \
-    && rm /opt/gradle-${GRADLE_VERSION}/lib/plugins/bcprov-jdk15on-1.68.jar \
-    && wget https://github.com/tiraxel/librerias_varias/raw/main/bcprov-jdk18on-1.76.jar \
-    && mv bcprov-jdk18on-1.76.jar bcprov-jdk15on-1.68.jar \
-    && mv bcprov-jdk15on-1.68.jar /opt/gradle-${GRADLE_VERSION}/lib/plugins/
-# Optimizacion de archivos
-RUN rm /var/log/dpkg.log
+    && rm /opt/gradle-${GRADLE_VERSION}/lib/plugins/bcprov-jdk15on-1.68.jar
 
 # Configuracion variables de entorno de Gradle
 ENV GRADLE_HOME=/opt/gradle-${GRADLE_VERSION}
