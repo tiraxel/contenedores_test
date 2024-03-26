@@ -32,6 +32,9 @@ RUN wget --no-verbose  "https://services.gradle.org/distributions/gradle-${GRADL
     && wget https://github.com/tiraxel/librerias_varias/raw/main/bcprov-jdk18on-1.76.jar \
     && mv bcprov-jdk18on-1.76.jar bcprov-jdk15on-1.68.jar \
     && mv bcprov-jdk15on-1.68.jar /opt/gradle-${GRADLE_VERSION}/lib/plugins/
+# Optimizacion de archivos
+RUN rm /var/log/dpkg.log
+
 # Configuracion variables de entorno de Gradle
 ENV GRADLE_HOME=/opt/gradle-${GRADLE_VERSION}
 ENV PATH=${GRADLE_HOME}/bin:${PATH}
